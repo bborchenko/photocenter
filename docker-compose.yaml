@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  server:
+    image: server
+    build:
+      context: ./nginx
+    ports:
+      - "80:5000"
+  db:
+    image: db
+    build:
+      context: ./postgres
+    env_file:
+      - pg.env
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+  drf:
+    image: drf
+    build:
+      context: ./drf
+    env_file:
+      - drf.env
+
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./postgres/pg_data
