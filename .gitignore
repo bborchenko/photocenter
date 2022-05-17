@@ -1,2 +1,4 @@
 .idea/
 venv/
+*.env
+postgres/pg_data/

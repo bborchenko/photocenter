@@ -7,6 +7,8 @@ services:
       context: ./nginx
     ports:
       - "80:5000"
+    volumes:
+      - static_data:/static
   db:
     image: db
     build:
@@ -18,9 +20,11 @@ services:
   drf:
     image: drf
     build:
-      context: ./drf
+      context: .
     env_file:
       - drf.env
+    volumes:
+      - static_data:/static
 
 volumes:
   db_data:
@@ -29,3 +33,4 @@ volumes:
       type: none
       o: bind
       device: ./postgres/pg_data
+  static_data:

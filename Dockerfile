@@ -12,8 +12,11 @@ RUN rm /requirements.txt \
  && chmod +x /scripts/*
  
 COPY ./code_files .
+RUN mkdir /static
 
 RUN adduser -D user
+RUN chmod -R 755 /static
+RUN chown -R user:user /static
 RUN chown -R user:user /core
 RUN chown -R user:user /logic
 USER user
